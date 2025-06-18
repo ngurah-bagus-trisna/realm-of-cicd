@@ -1,0 +1,35 @@
+name: Deploy Workflow
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: 'The environment to deploy to'
+        required: true
+        type: string
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Deploy to ${{ inputs.environment }}
+      run: |
+        echo "Deploy to staging"
+        docker run -d --name archon-staging \
+          -p 8080:8080 \
+          ${{ secrets.DOCKER_USERNAME }}/archon-image:latest
+    
+    - name: Wait for service to be ready
+      run: |
+        echo "Waiting for service to be ready"
+        sleep 20  # Adjust the sleep time as necessary
+
+    - name: Testing to hit using smoke tests on environment ${{ inputs.environment }}
+      run: |
+        echo "Running smoke tests"
+        # Add your smoke test commands here, e.g.:
+        chmod +x tests/smoke_test
+        bash tests/smoke_test
+        echo "Finished deploy to ${{ inputs.environment }}"

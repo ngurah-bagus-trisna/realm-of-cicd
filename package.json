@@ -1,0 +1,29 @@
+{
+  "name": "realm-of-cicd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngurah-bagus-trisna/realm-of-cicd.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ngurah-bagus-trisna/realm-of-cicd/issues"
+  },
+  "homepage": "https://github.com/ngurah-bagus-trisna/realm-of-cicd#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.29.0",
+    "globals": "^16.2.0"
+  }
+}
