@@ -28,7 +28,7 @@ jobs:
           
       - name: Run GolangCI-Lint
         if: matrix.language == 'go'
-        uses: golangci-lint-action@v8
+        uses: golangci/golangci-lint-action@v8
         with:
           version: v2.1
 
