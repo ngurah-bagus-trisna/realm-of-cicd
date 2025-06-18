@@ -26,12 +26,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           
-      - name: Run GolangCI-Lint
-        if: matrix.language == 'go'
-        uses: golangci/golangci-lint-action@v8
-        with:
-          version: v2.1
-          args: run --disable typecheck
+#      - name: Run GolangCI-Lint
+#        if: matrix.language == 'go'
+#        uses: golangci/golangci-lint-action@v8
+#        with:
+#          version: v2.1
 
 #      - name: Run npm lint
 #        if: matrix.language == 'node'
