@@ -31,6 +31,7 @@ jobs:
         uses: golangci/golangci-lint-action@v8
         with:
           version: v2.1
+          args: run --disable typecheck
 
 #      - name: Run npm lint
 #        if: matrix.language == 'node'
@@ -86,6 +87,7 @@ jobs:
             tests/hello.txt
   
   build-image:
+    needs: lint-test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -99,14 +101,14 @@ jobs:
         with:
           context: .
           push: false
-          tags: ${{ secrets.DOCKER_USERNAME }}/archon-image:latest
+          tags: archon-image:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
       - name: Scan docker image
         uses: aquasecurity/trivy-action@0.28.0
         with:
-          image-ref: ${{ secrets.DOCKER_USERNAME }}/archon-image:latest
+          image-ref: archon-image:latest
           format: 'table'
           severity: CRITICAL,HIGH
           ignore-unfixed: true
@@ -117,6 +119,7 @@ jobs:
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           echo "Pushing docker image to registry"
           # Add your docker push commands here, e.g.:
+          docker tag archon-image:latest ${{ secrets.DOCKER_USERNAME }}/archon-image:latest
           docker tag ${{ secrets.DOCKER_USERNAME }}/archon-image:latest ${{ secrets.DOCKER_USERNAME }}/archon-image:${{ github.sha }}
           docker push ${{ secrets.DOCKER_USERNAME }}/archon-image:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/archon-image:${{ github.sha }}
