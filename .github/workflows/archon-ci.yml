@@ -113,16 +113,16 @@ jobs:
     needs: [build-image, IaC-apply]
     uses: ./.github/workflows/deploy.yaml
     with:
-      environment: development
+      environment: Development
 
   deploy-staging:
     needs: [deploy-development]
     uses: ./.github/workflows/deploy.yaml
     with:
-      environment: staging
+      environment: Staging
 
   deploy-production:
     needs: [deploy-staging]
     uses: ./.github/workflows/deploy.yaml
     with:
-      environment: production
+      environment: Production
