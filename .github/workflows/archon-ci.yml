@@ -89,6 +89,10 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/archon-image:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
+        
+      - name: Pull image
+        run: |
+          docker pull ${{ secrets.DOCKER_USERNAME }}/archon-image:latest
 
       - name: Scan docker image
         uses: aquasecurity/trivy-action@0.28.0
