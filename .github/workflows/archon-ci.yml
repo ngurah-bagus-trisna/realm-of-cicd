@@ -32,6 +32,7 @@ jobs:
           cd tests
           go mod init hello_test
           go mod tidy
+          go test -c ./... || true
           
       - name: Run linter on golangci-lint
         if: matrix.language == 'go'
