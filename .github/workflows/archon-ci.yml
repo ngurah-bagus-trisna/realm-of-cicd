@@ -33,6 +33,7 @@ jobs:
           curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/HEAD/install.sh | sh -s v2.1.6
           go mod init hello_test
           go mod tidy
+          go test -c ./... || true
           chmod +x ./bin/golangci-lint
           ./bin/golangci-lint run           
 
