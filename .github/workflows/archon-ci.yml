@@ -26,21 +26,17 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install Go dependencies
+      - name: Run linter on go
         if: matrix.language == 'go'
         run: |
+          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/HEAD/install.sh | sh -s v2.1.6
+          
           cd tests
           go mod init hello_test
           go mod tidy
-          go test -c ./... || true
-          
-      - name: Run linter on golangci-lint
-        if: matrix.language == 'go'
-        uses: golangci/golangci-lint-action@v8  
-        with:
-          working-directory: tests
-          version: v2.1 
-          
+          chmod +x ./bin/golangci-lint
+          ./bin/golangci-lint run           
+
       - name: Run lint and unit tests on nodejs
         if: matrix.language == 'node'
         run: |
