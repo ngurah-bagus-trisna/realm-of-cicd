@@ -30,6 +30,7 @@ jobs:
         if: matrix.language == 'go'
         run: |
           cd tests
+          go mod init hello_test
           go mod tidy
           
       - name: Run linter on golangci-lint
