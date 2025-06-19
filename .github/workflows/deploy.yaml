@@ -17,9 +17,7 @@ jobs:
     - name: Deploy to ${{ inputs.environment }}
       run: |
         echo "Deploy to staging"
-        docker run -d --name archon-staging \
-          -p 8080:8080 \
-          ${{ secrets.DOCKER_USERNAME }}/archon-image:latest
+        docker run -d --name archon-${{ inputs.environment}} -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/archon-image:latest
     
     - name: Wait for service to be ready
       run: |
