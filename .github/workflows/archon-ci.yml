@@ -25,7 +25,13 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      
+
+      - name: Install Go dependencies
+        if: matrix.language == 'go'
+        run: |
+          cd tests
+          go mod tidy
+          
       - name: Run linter on golangci-lint
         if: matrix.language == 'go'
         uses: golangci/golangci-lint-action@v8  
