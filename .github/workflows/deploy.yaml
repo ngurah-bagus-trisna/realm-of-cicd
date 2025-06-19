@@ -31,3 +31,4 @@ jobs:
         chmod +x tests/smoke_test
         bash tests/smoke_test
         echo "Finished deploy to ${{ inputs.environment }}"
+        docker rm -f archon-${{ inputs.environment}} || true
