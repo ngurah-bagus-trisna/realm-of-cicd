@@ -13,13 +13,12 @@ do
   STATUS=$(curl -s -o /dev/null -w '%{http_code}' $SMOKE_URL)
   if [ $STATUS -eq 200 ]; then
     smoke_url_ok $SMOKE_URL
-    smoke_assert_body "Welcome to CI/CD"
-    smoke_assert_body "Version Number:"
+    smoke_assert_body "Hello World!"
     smoke_report
     echo "\n\n"
     echo 'Smoke Tests Successfully Completed.'
-    echo 'Terminating the Kubernetes Cluster in 300 seconds...'
-    sleep 300
+    echo 'Terminating the docker container in 5 seconds...'
+    sleep 5
     break
   elif [[ $TIME_OUT_COUNT -gt $TIME_OUT ]]; then
     echo "Process has Timed out! Elapsed Timeout Count.. $TIME_OUT_COUNT"

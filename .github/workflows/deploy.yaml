@@ -28,7 +28,7 @@ jobs:
       run: |
         echo "Running smoke tests"
         # Add your smoke test commands here, e.g.:
-        chmod +x tests/smoke_test
-        bash tests/smoke_test
+        chmod +x ./tests/smoke_test
+        bash ./tests/smoke_test
         echo "Finished deploy to ${{ inputs.environment }}"
         docker rm -f archon-${{ inputs.environment}} || true
