@@ -93,7 +93,7 @@ jobs:
       - name: Scan docker image
         uses: aquasecurity/trivy-action@0.28.0
         with:
-          image-ref: archon-image:latest
+          image-ref: ${{ secrets.DOCKER_USERNAME }}/archon-image:latest
           format: 'table'
           severity: CRITICAL,HIGH
           ignore-unfixed: true
